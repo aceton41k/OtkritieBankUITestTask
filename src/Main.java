@@ -23,12 +23,12 @@ public class Main {
     @Test (dependsOnMethods = "searchGoogle")
     public void currencyTestHtml() {
         open("https://www.open.ru/");
-        float usdSale1 = Float.parseFloat($(By.xpath("//td//span[text()='USD']/../../../td[4]/div/span[@class='main-page-exchange__rate']")).getText().replace(",","."));
-        float usdBuy1 = Float.parseFloat($(By.xpath("//td//span[text()='USD']/../../../td[2]/div/span[@class='main-page-exchange__rate']")).getText().replace(",","."));
-        double eurSale1 = Double.parseDouble($(By.xpath("//td//span[text()='EUR']/../../../td[4]/div/span[@class='main-page-exchange__rate']")).getText().replace(",","."));
-        double eurBuy1 = Double.parseDouble($(By.xpath("//td//span[text()='EUR']/../../../td[2]/div/span[@class='main-page-exchange__rate']")).getText().replace(",","."));
-        assertTrue(usdSale1 > usdBuy1);
-        assertTrue(eurSale1 > eurBuy1);
+        float usdSale = Float.parseFloat($(By.xpath("//td//span[text()='USD']/../../../td[4]/div/span[@class='main-page-exchange__rate']")).getText().replace(",","."));
+        float usdBuy = Float.parseFloat($(By.xpath("//td//span[text()='USD']/../../../td[2]/div/span[@class='main-page-exchange__rate']")).getText().replace(",","."));
+        float eurSale = Float.parseFloat($(By.xpath("//td//span[text()='EUR']/../../../td[4]/div/span[@class='main-page-exchange__rate']")).getText().replace(",","."));
+        float eurBuy = Float.parseFloat($(By.xpath("//td//span[text()='EUR']/../../../td[2]/div/span[@class='main-page-exchange__rate']")).getText().replace(",","."));
+        assertTrue(usdSale > usdBuy);
+        assertTrue(eurSale > eurBuy);
 
     }
 
@@ -43,7 +43,7 @@ public class Main {
         JSONArray usdBuy =  JsonPath.read(jsonObject, "exchangeCard.exchangeRates[?(@.title=='Курс обмена в интернет-банке')].data[?(@.name=='USD')].buy.value");
         JSONArray eurSale = JsonPath.read(jsonObject, "exchangeCard.exchangeRates[?(@.title=='Курс обмена в интернет-банке')].data[?(@.name=='EUR')].sale.value");
         JSONArray eurBuy = JsonPath.read(jsonObject, "exchangeCard.exchangeRates[?(@.title=='Курс обмена в интернет-банке')].data[?(@.name=='USD')].buy.value");
-        assertTrue((double)usdSale.get(0) > (double )usdBuy.get(0));
+        assertTrue((double)usdSale.get(0) > (double)usdBuy.get(0));
         assertTrue((double)eurSale.get(0) > (double )eurBuy.get(0));
     }
 }
